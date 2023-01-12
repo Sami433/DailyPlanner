@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.64/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.64/vfs_fonts.js"></script>
+<link rel="shortcut icon" href="journal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet">
+
+<style>
+      @font-face{
+        
+        font-family:"Low Budget";
+        src: url('Low Budget.otf');
+      
+  
+    } 
+
+
+    button.display-button {
+    background-color: rgb(0, 200, 255);
+    color: white;
+margin-right: 1%;
+margin-left:40%;
+}
+button.download-button {
+    background-color:  rgb(0, 200, 255);
+    color: white;
+}
+
+    body{
+
+        background-color:#e0f0fa;
+    }
+    h1{
+
+        font-family:Low Budget;
+        margin-bottom: 5%;
+        text-align: center;
+
+    }
+  /* Style pour le tableau d'emploi du temps */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  /* Style pour les cellules de la table */
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-family: 'Aclonica', sans-serif;
+  }
+  /* Style pour le bouton d'affichage de l'emploi du temps */
+  .display-button {
+    background-color: #4CAF50; /* Couleur verte */
+    color: white; /* Texte blanc */
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  /* Style pour cacher le tableau d'affichage de l'emploi du temps par défaut */
+  #schedule-display {
+    display: none;
+  }
+  /* Style pour le bouton de téléchargement de PDF */
+  .download-button {
+    background-color: #4CAF50; /* Couleur verte */
+    color: white; /* Texte blanc */
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+</style>
+<script>
+  function displaySchedule() {
+    // Récupérer les entrées de l'emploi du temps
+    var monday = document.getElementById("lundi").value;
+    var tuesday = document.getElementById("mardi").value;
+    var wednesday = document.getElementById("mercredi").value;
+    var thursday = document.getElementById("jeudi").value;
+    var friday = document.getElementById("vendredi").value;
+    var saturday = document.getElementById("samedi").value;
+    var sunday = document.getElementById("dimanche").value;// Remplir les cellules du tableau avec les entrées de l'emploi du temps
+document.getElementById("lundi-schedule").innerHTML = monday;
+document.getElementById("mardi-schedule").innerHTML = tuesday;
+document.getElementById("mercredi-schedule").innerHTML = wednesday;
+document.getElementById("jeudi-schedule").innerHTML = thursday;
+document.getElementById("vendredi-schedule").innerHTML = friday;
+document.getElementById("samedi-schedule").innerHTML = saturday;
+document.getElementById("dimanche-schedule").innerHTML = sunday;
+
+// Afficher le tableau d'affichage de l'emploi du temps
+document.getElementById("schedule-display").style.display = "block";
+}
+
+function downloadPDF() {
+// Tableau des entrées de l'emploi du temps
+var scheduleData = [
+["Lundi", document.getElementById("lundi").value],
+["Mardi", document.getElementById("mardi").value],
+["Mercredi", document.getElementById("mercredi").value],
+["Jeudi", document.getElementById("jeudi").value],
+["Vendredi", document.getElementById("vendredi").value],
+["Samedi", document.getElementById("samedi").value],
+["Dimanche", document.getElementById("dimanche").value]
+];// Définition de la structure du tableau pour pdfmake
+var scheduleTable = {
+    content: [
+        {
+            table: {
+                headerRows: 1,
+                widths: ['*', '*'],
+                body: [
+                    [{ text: 'Jour', style: 'tableHeader' }, { text: 'Notes', style: 'tableHeader' }],
+                    ...scheduleData
+                ]
+            },
+            layout: 'lightHorizontalLines'
+        }
+    ],
+    styles: {
+        tableHeader: {
+            bold: true,
+            fontSize: 14,
+            color: '#000'
+        }
+    }
+};
+
+// Génération du PDF avec pdfmake
+var doc = pdfMake.createPdf(scheduleTable);
+
+// Téléchargement du PDF
+doc.download("dailyplanner.pdf");
+}
+</script>
+
+</head>
+<body>
+
+<h1> <div class="img"><img src="journal.png" alt="logo" width="45px" height="45px"></div>&nbsp;&nbsp;Daily Planner</h1>
+<form>
+  <table>
+    <tr>
+      <th>Jour</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Lundi</td>
+      <td><textarea id="lundi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Mardi</td>
+      <td><textarea id="mardi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Mercredi</td>
+      <td><textarea id="mercredi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Jeudi</td>
+      <td><textarea id="jeudi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Vendredi</td>
+      <td><textarea id="vendredi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Samedi</td>
+      <td><textarea id="samedi"></textarea></td>
+    </tr>
+    <tr>
+      <td>Dimanche</td>
+      <td><textarea id="dimanche"></textarea></td>
+    </tr>
+  </table>
+  <br>
+  <button type="button"  onclick="displaySchedule()" class="display-button">Afficher</button>
+  <button type="button" onclick="downloadPDF()" class="download-button">Télécharger PDF</button>
+  <br><br>
+  <table id="schedule-display">
+    <tr>
+      <th>Jour</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Lundi</td>
+      <td id="lundi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Mardi</td>
+      <td id="mardi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Mercredi</td>
+      <td id="mercredi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Jeudi</td>
+      <td id="jeudi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Vendredi</td>
+      <td id="vendredi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Samedi</td>
+      <td id="samedi-schedule"></td>
+    </tr>
+    <tr>
+      <td>Dimanche</td>
+      <td id="dimanche-schedule"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
