@@ -1,0 +1,65 @@
+@font-face{
+        
+    font-family:"Low Budget";
+    src: url('Low Budget.otf');
+  
+
+} 
+
+
+button.display-button {
+background-color: rgb(0, 200, 255);
+color: white;
+margin-right: 1%;
+margin-left:40%;
+}
+button.download-button {
+background-color:  rgb(0, 200, 255);
+color: white;
+}
+
+body{
+
+    background-color:#e0f0fa;
+}
+h1{
+
+    font-family:Low Budget;
+    margin-bottom: 5%;
+    text-align: center;
+
+}
+/* Style pour le tableau d'emploi du temps */
+table {
+width: 100%;
+border-collapse: collapse;
+}
+/* Style pour les cellules de la table */
+td, th {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 8px;
+font-family: 'Aclonica', sans-serif;
+}
+/* Style pour le bouton d'affichage de l'emploi du temps */
+.display-button {
+background-color: #4CAF50; /* Couleur verte */
+color: white; /* Texte blanc */
+padding: 12px 20px;
+border: none;
+cursor: pointer;
+margin-top: 20px;
+}
+/* Style pour cacher le tableau d'affichage de l'emploi du temps par défaut */
+#schedule-display {
+display: none;
+}
+/* Style pour le bouton de téléchargement de PDF */
+.download-button {
+background-color: #4CAF50; /* Couleur verte */
+color: white; /* Texte blanc */
+padding: 12px 20px;
+border: none;
+cursor: pointer;
+margin-top: 20px;
+}
