@@ -10,27 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet">
 
 
-<script>
-  function displaySchedule() {
-    // Récupérer les entrées de l'emploi du temps
-    var monday = document.getElementById("lundi").value;
-    var tuesday = document.getElementById("mardi").value;
-    var wednesday = document.getElementById("mercredi").value;
-    var thursday = document.getElementById("jeudi").value;
-    var friday = document.getElementById("vendredi").value;
-    var saturday = document.getElementById("samedi").value;
-    var sunday = document.getElementById("dimanche").value;// Remplir les cellules du tableau avec les entrées de l'emploi du temps
-document.getElementById("lundi-schedule").innerHTML = monday;
-document.getElementById("mardi-schedule").innerHTML = tuesday;
-document.getElementById("mercredi-schedule").innerHTML = wednesday;
-document.getElementById("jeudi-schedule").innerHTML = thursday;
-document.getElementById("vendredi-schedule").innerHTML = friday;
-document.getElementById("samedi-schedule").innerHTML = saturday;
-document.getElementById("dimanche-schedule").innerHTML = sunday;
-
-// Afficher le tableau d'affichage de l'emploi du temps
-document.getElementById("schedule-display").style.display = "block";
-}
 
 function downloadPDF() {
 // Tableau des entrées de l'emploi du temps
@@ -114,7 +93,6 @@ doc.download("dailyplanner.pdf");
     </tr>
   </table>
   <br>
-  <button type="button"  onclick="displaySchedule()" class="display-button">Afficher</button>
   <button type="button" onclick="downloadPDF()" class="download-button">Télécharger PDF</button>
   <br><br>
   <table id="schedule-display">
